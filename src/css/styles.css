@@ -23,28 +23,3 @@ body {
   list-style: none;
   padding: 0;
 }
-
-/* .country-list {
-  display: flex;
-  align-items: center;
-} */
-.country-list__name {
-  display: inline-block;
-  margin-left: 20px;
-  font-size: 18px;
-}
-.country-info__list {
-  list-style: none;
-  padding: 0;
-  font-size: 20px;
-}
-.country-info__img {
-  margin-right: 10px;
-}
-.country-info__item:not(:last-child) {
-  margin-bottom: 15px;
-}
-.country-info__value {
-  margin-left: 10px;
-  font-weight: 400;
-}

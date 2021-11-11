@@ -15,8 +15,7 @@ const refs = {
 refs.searchbox.addEventListener('input', debounce(inputCountry, DEBOUNCE_DELAY));
 
 function inputCountry() {
-  refs.country.innerHTML = '';
-  refs.info.innerHTML = '';
+  createMarkup();
   const value = refs.searchbox.value.trim();
   if (!value) {
     return;
@@ -34,24 +33,30 @@ function inputCountry() {
         Notify.info('Too many matches found. Please enter a more specific name.');
         return;
       }
+      if (countries.length >= 2 && countries.length <= 10) {
+        return countryList(countries);
+      }
       if (countries.length === 1) {
         return countryCard(countries);
-      } else {
-        return countryList(countries);
       }
     })
     .catch(console.log);
 }
 
+function createMarkup() {
+  refs.country.innerHTML = '';
+  refs.info.innerHTML = '';
+}
+
 function countryCard(country) {
   const { flags, name, capital, languages, population } = country[0];
-  const lg = Object.values(languages).join(', ');
+  const language = Object.values(languages).join(', ');
   return (refs.info.innerHTML = `
 <h1><img src="${flags.svg}" alt="${name.official} width="30" height="20"">${name.official}</h1>
 <ul>
 <li class="country-list"><b>Capital:</b><span>${capital}</span></li>
 <li class="country-list"><b>Population:</b><span>${population}</span></li>
-<li class="country-list"><b>Languages:</b><span >${lg}</span></li>
+<li class="country-list"><b>Languages:</b><span >${language}</span></li>
 </ul>`);
 }
 
